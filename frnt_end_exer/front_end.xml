@@ -1,0 +1,46 @@
+<project name="front_end" basedir="." default="main">
+	<dirname property="fe.basedir" file="${ant.file.front_end}"/>	
+
+	<property name="src.dir" value="${fe.basedir}/src"/>
+	<property name="build.dir" value="${fe.basedir}/build"/>
+	<property name="classes.dir" value="${build.dir}/classes"/>
+
+	<!-- <property name="lib.dir" value="../lib"/>-->
+        <property name="lib.dir" value="lib"/>
+
+	<property name="war.dir" value="${build.dir}/war"/>
+	<property name="ear.dir" value="${build.dir}/ear"/>
+	<property name="web.root.dir" value="${fe.basedir}/WebContent"/>
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="**/*.jar"/>
+		<!-- <fileset dir="${util.lib.dir}" includes="**/*.jar"/> -->
+	</path>
+
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${classes.dir}"/>
+		<javac encoding="iso-8859-1" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+	</target>
+
+	<target name="war" depends="compile">
+		<mkdir dir="${war.dir}"/>
+		<war destfile="${war.dir}/${ant.project.name}.war" webxml="${web.root.dir}/WEB-INF/web.xml">
+			<fileset dir="${web.root.dir}">
+				<include name="**/*"/>
+			</fileset>
+		</war>
+	</target>
+	
+	<target name="ear" depends="war">
+		<mkdir dir="${ear.dir}"/>
+		<ear destfile="${ear.dir}/${ant.project.name}.ear" appxml="${web.root.dir}/WEB-INF/web.xml">
+			<fileset dir="${war.dir}" includes="*.war"/>
+		</ear>
+	</target>
+
+	<target name="main" depends="clean,ear"/>
+</project>

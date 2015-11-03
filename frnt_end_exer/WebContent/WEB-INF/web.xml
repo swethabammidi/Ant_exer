@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+   <web-app id="WebApp">
+      <display-name>selfProvisioning</display-name>
+      <filter id="Filter_1092940744186">
+         <filter-name>StylesheetFilter</filter-name>
+         <display-name>StylesheetFilter</display-name>
+         <filter-class>com.vzw.selfProvisioning.StylesheetFilter</filter-class>
+         <init-param id="InitParam_1092940744187">
+            <param-name>xsltPath</param-name>
+            <param-value>/WEB-INF/xslt/</param-value>
+         </init-param>
+      </filter>
+      <filter>
+      	<filter-name>MultipartFilter</filter-name>
+      	<display-name>MultipartFilter</display-name>
+      	<filter-class>com.openwave.developer.multipartfilter.MultipartFilter</filter-class>
+      </filter>
+      <filter-mapping>
+      	<filter-name>MultipartFilter</filter-name>
+      	<url-pattern>/SelfProvisioningServlet</url-pattern>
+      </filter-mapping>
+      <filter-mapping>
+      	<filter-name>MultipartFilter</filter-name>
+      	<url-pattern>/SelfProvisioning</url-pattern>
+      </filter-mapping>
+      <filter-mapping>
+      	<filter-name>StylesheetFilter</filter-name>
+      	<url-pattern>/SelfProvisioningServlet</url-pattern>
+      </filter-mapping>
+      <filter-mapping>
+      	<filter-name>StylesheetFilter</filter-name>
+      	<url-pattern>/SelfProvisioning</url-pattern>
+      </filter-mapping>
+      <servlet id="Servlet_1092940743344">
+         <servlet-name>SelfProvisioningServlet</servlet-name>
+         <display-name>SelfProvisioningServlet</display-name>
+         <servlet-class>com.vzw.selfProvisioning.SelfProvisioningServlet</servlet-class>
+         <init-param id="InitParam_1092940744188">
+            <param-name>propertyFile</param-name>
+            <param-value>selfProvisioning.properties</param-value>
+         </init-param>
+      </servlet>
+      <servlet>
+      	<servlet-name>LogLoader</servlet-name>
+      	<display-name>LogLoader</display-name>
+      	<servlet-class>LogLoader</servlet-class>
+      	<load-on-startup>-1</load-on-startup>
+      </servlet>
+      <servlet>
+      	<servlet-name>PropLoader</servlet-name>
+      	<display-name>PropLoader</display-name>
+      	<servlet-class>PropLoader</servlet-class>
+      	<load-on-startup>1</load-on-startup>
+      </servlet>
+      <servlet>
+      	<servlet-name>TestDriver</servlet-name>
+      	<display-name>TestDriver</display-name>
+      	<servlet-class>TestDriver</servlet-class>
+      </servlet>
+      <servlet>
+      	<servlet-name>TestDriverPerf</servlet-name>
+      	<display-name>TestDriverPerf</display-name>
+      	<servlet-class>TestDriverPerf</servlet-class>
+      </servlet>
+      <servlet-mapping id="ServletMapping_1092940744189">
+         <servlet-name>SelfProvisioningServlet</servlet-name>
+         <url-pattern>/SelfProvisioningServlet</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping id="ServletMapping_1092940744190">
+         <servlet-name>SelfProvisioningServlet</servlet-name>
+         <url-pattern>/SelfProvisioning</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping>
+      	<servlet-name>TestDriver</servlet-name>
+      	<url-pattern>/TestDriver</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping>
+      	<servlet-name>LogLoader</servlet-name>
+      	<url-pattern>/LogLoader</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping>
+      	<servlet-name>PropLoader</servlet-name>
+      	<url-pattern>/PropLoader</url-pattern>
+      </servlet-mapping>
+      <servlet-mapping>
+      	<servlet-name>TestDriverPerf</servlet-name>
+      	<url-pattern>/TestDriverPerf</url-pattern>
+      </servlet-mapping>
+      <mime-mapping id="MimeMapping_1092940744189">
+         <extension>.wbmp</extension>
+         <mime-type>image/vnd.wap.wbmp</mime-type>
+      </mime-mapping>
+      <welcome-file-list id="WelcomeFileList_1092940744190">
+         <welcome-file>index.html</welcome-file>
+         <welcome-file>index.htm</welcome-file>
+         <welcome-file>index.jsp</welcome-file>
+         <welcome-file>default.html</welcome-file>
+         <welcome-file>default.htm</welcome-file>
+         <welcome-file>default.jsp</welcome-file>
+      </welcome-file-list>
+      <resource-ref id="ResourceRef_1141856796037">
+      	<res-ref-name>jdbc/SelfProvDSGeneva</res-ref-name>
+      	<res-type>javax.sql.DataSource</res-type>
+      	<res-auth>Application</res-auth>
+      	<res-sharing-scope>Shareable</res-sharing-scope>
+      </resource-ref>
+   </web-app>

@@ -1,0 +1,40 @@
+<project name="buildingproject" basedir="." default="zip">
+<!--
+
+ 1. Compile the java sources
+ 2. Create a jar file
+ 3. Copy web fles into the build folder
+ 4. Create a zip file containg jar as well as web files
+
+-->
+
+ <property name="lib.dir" value="lib"/>
+ <path id="classpath">
+                <fileset dir="${lib.dir}" includes="**/*.jar"/>
+                <!-- <fileset dir="${util.lib.dir}" includes="**/*.jar"/> -->
+        </path>
+
+<target name="clean">
+      <delete dir="build/classes"/>
+      <delete dir="build/jar"/>
+    </target>
+
+
+     <target name="init" depends="clean">
+  <mkdir dir="build/classes"/>
+  <mkdir dir="build/jar"/>
+     </target>
+       <target name="compile" depends="init">
+          <javac srcdir="util_exer/src" destdir="build/classes" classpathref="classpath" includeantruntime="false"/>
+	</target>
+
+     <target name="jar" depends="compile">
+       <jar destfile="build/jar/app-1.0.jar" basedir="build/classes"/>
+     </target>
+
+    <target name="zip" depends="jar">
+       <zip destfile="dist/app-1.0.zip"
+       basedir="build/jar"/>        
+    </target>
+   
+</project>

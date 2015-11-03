@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@ page language="java" import="com.vzw.selfProvisioning.mobileWeb.*, com.vzw.selfProvisioning.utils.*, com.vzw.edr.selfProv.utils.*, org.apache.log4j.*" %>
+<%!
+	static Logger L = Logger.getLogger(SPProps.feLoggerBase + ".limLiabilitesTC_jsp");		
+%>
+<%
+	int service = Util.getService(request);
+	L.debug ("Service Requested = " + service);
+	String imgBaseUrl = Util.getContextURL(request);			
+%>
+
+<document>
+	<para>
+		<% if (service == Util.CSP) { %>
+		<paraValue>LIMITATION OF LIABILITY. WE EACH AGREE TO LIMIT CLAIMS FOR DAMAGES OR OTHER 
+		 MONETARY RELIEF AGAINST EACH OTHER TO DIRECT DAMAGES. IN NO EVENT SHALL OUR, OR OUR 
+		 AFFILIATES AGGREGATE, TOTAL LIABILITY FOR DIRECT DAMAGES ARISING FROM OR RELATING TO USE 
+		 OF THE SERVICE EXCEED THE GREATER OF: (1) THE AMOUNT OF MONTHLY ACCESS FEE, IF ANY, PAID BY 
+		 YOU TO VERIZON WIRELESS IN RESPECT OF THE USE OF THE SERVICE OR (2) $$100.00.</paraValue>
+		<% } else if(service == Util.WSP) { %>
+		<paraValue>LIMITATION OF LIABILITY. WE EACH AGREE TO LIMIT CLAIMS FOR DAMAGES OR OTHER 
+		 MONETARY RELIEF AGAINST EACH OTHER TO DIRECT DAMAGES. IN NO EVENT SHALL OUR, OR OUR 
+		 AFFILIATES AGGREGATE, TOTAL LIABILITY FOR DIRECT DAMAGES ARISING FROM OR RELATING TO USE 
+		 OF THE SERVICE EXCEED THE GREATER OF: (1) THE AMOUNT OF MONTHLY ACCESS FEE, IF ANY, PAID BY 
+		 YOU TO VERIZON WIRELESS IN RESPECT OF THE USE OF THE SERVICE OR (2) $100.00.</paraValue>
+		<% } else if(service == Util.VCAST) { %>
+		<logoImg><%= imgBaseUrl %>images/vzwLogo.jpg</logoImg>							
+		<paraValue>LIMITATION OF LIABILITY. WE EACH AGREE TO LIMIT CLAIMS FOR DAMAGES OR OTHER 
+		 MONETARY RELIEF AGAINST EACH OTHER TO DIRECT DAMAGES. IN NO EVENT SHALL OUR, OR OUR 
+		 AFFILIATES AGGREGATE, TOTAL LIABILITY FOR DIRECT DAMAGES ARISING FROM OR RELATING TO USE 
+		 OF THE SERVICE EXCEED THE GREATER OF: (1) THE AMOUNT OF MONTHLY ACCESS FEE, IF ANY, PAID BY 
+		 YOU TO VERIZON WIRELESS IN RESPECT OF THE USE OF THE SERVICE OR (2) $100.00.</paraValue>
+		<% } %>
+		<tcLink><%=response.encodeURL(SPProps.termsAndConditionsUrl)%></tcLink>
+	</para>
+</document>

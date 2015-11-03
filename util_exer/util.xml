@@ -1,0 +1,33 @@
+<project name="util" basedir="." default="main">
+	<dirname property="util.basedir" file="${ant.file.util}"/>
+
+	<property name="src.dir" value="${util.basedir}/src"/>
+	<property name="build.dir" value="${util.basedir}/build"/>
+	<property name="classes.dir" value="${build.dir}/classes"/>
+
+	<!-- <property name="lib.dir" value="../lib"/>-->
+        <property name="lib.dir" value="lib"/>
+
+	<property name="jar.dir" value="${build.dir}/jar"/>
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="**/*.jar"/>
+	</path>
+
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${classes.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+	</target>
+
+	<target name="jar" depends="compile">
+		<mkdir dir="${jar.dir}"/>
+		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}"/>
+		<copy file="${jar.dir}/${ant.project.name}.jar" todir="${lib.dir}"/>
+	</target>
+
+	<target name="main" depends="clean,jar"/>
+</project>

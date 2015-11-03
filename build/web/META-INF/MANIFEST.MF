@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: SelfProvUtil.jar 
+ commons-httpclient-2.0.2.jar 
+ commons-logging.jar
+

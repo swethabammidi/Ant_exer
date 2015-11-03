@@ -1,0 +1,62 @@
+<project name="buildingproject" basedir="." default="zip">
+
+<!--
+
+  1. Comiple the java sources
+  2. Create a Jar file
+  3. Copy the web files into the build folder
+  4. Create a zip file which contains jar as well as web files
+
+-->
+<property name="src.dir" value="frnt_end_exer/src"/>
+<!--property name="build.dir" value="build"/-->
+<property name="classes.dir" value="build/classes"/>
+<property name="lib.dir" value="lib"/>
+<property name="jar.dir" value="build/jar"/>
+<property name="web.src.dir" value="frnt_end_exer/WebContent"/>
+<property name="web.dir" value="build/web"/>
+<property name="dist.dir" value="dist"/>
+ <path id="classpath">
+                <fileset dir="${lib.dir}" includes="**/*.jar"/>
+                <!-- <fileset dir="${util.lib.dir}" includes="**/*.jar"/> -->
+        </path>
+
+
+      <target name="clean">
+       <delete dir="build/classes"/>
+       <delete dir="build/jar"/>
+       <delete dir="build/web"/>
+      </target>
+
+       <target name="init" depends="clean">
+         <mkdir dir="build/classes"/>
+         <mkdir dir="build/jar"/>
+         <mkdir dir="build/web"/>
+              </target>
+ 
+	<target name="compile" depends="init">
+         <javac srcdir="${src.dir}"
+         destdir="${classes.dir}"
+         classpathref="classpath" includeantruntime="false" encoding="iso-8859-1"> 
+         </javac>       
+	</target>
+
+        <target name ="jar" depends="compile">
+        <jar destfile="${jar.dir}/frnt_end_exer-0.1.jar" basedir="${classes.dir}"/>
+        </target>
+
+       <target name="copywebfiles">
+       <copy todir="${web.dir}">
+    <fileset dir="${web.src.dir}"/>
+  </copy>
+       </target>
+   
+     <target name="zip" depends="jar,copywebfiles">
+      <zip destfile="${dist.dir}/frnt_end_exer-1.0.zip">
+    <fileset dir="${web.dir}"/>
+    <fileset dir="${jar.dir}"/>
+  </zip>
+     </target>
+        
+
+</project>
